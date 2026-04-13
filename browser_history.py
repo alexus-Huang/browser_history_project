@@ -10,37 +10,23 @@ class BrowserHistory:
         self.current_page = url
         self.forward_stack.clear()
     
-    # function back():
-    # if back_stack is empty:
-    #     print "No pages to go back to"
-    #     return current_page
+    def back(self):
+        if not self.back_stack:
+            return None
+        self.forward_stack.append(self.current_page)
+        self.current_page = self.back_stack.pop()
+        return self.current_page
 
-    # push current_page to forward_stack
+    def forward(self):
+        if not self.forward_stack:
+             return None
+        
+        self.back_stack.append(self.current_page)
+        self.current_page = self.forward_stack.pop()
+        return self.current_page
 
-    # current_page = pop from back_stack
-
-    # return current_page
-
-
-
-    # function forward():
-    # if forward_stack is empty:
-    #     print "No pages to go forward to"
-    #     return current_page
-
-    # push current_page to back_stack
-
-    # current_page = pop from forward_stack
-
-    # return current_page
-
-
-    # function get_current_page():
-    # return current_page
-
-
-
-    # function print_state():
-    # print "Back:", back_stack
-    # print "Current:", current_page
-    # print "Forward:", forward_stack
+    def get_current_page(self):
+        return self.current_page
+    
+    def print_state(self):
+        print(f"Back: {self.back_stack}\nCurrent: {self.current_page}\nForward: {self.forward_stack}")
